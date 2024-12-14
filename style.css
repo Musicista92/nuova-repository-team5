@@ -21,7 +21,7 @@ header img{
 }
 .h1Welcome{
     color:white;
-    margin-bottom: 25px;
+    margin-bottom: 50px;
     
 }
 .h1Welcome{
@@ -30,6 +30,10 @@ header img{
     font-family: outfit;
     font-weight: 300;
     
+}
+
+.h1Welcome {
+    line-height: 0.7; /* Riduce lo spazio tra le righe */
 }
 
 
