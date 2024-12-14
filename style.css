@@ -158,7 +158,7 @@ html,.bodyQuiz{
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
 }
 
 #formQuiz{
@@ -232,6 +232,11 @@ html,.bodyQuiz{
     position: fixed;
     width: 142px;
     height: 142px;
+    top: 20%;
+    right: 10%;
+    transform: translateY(-50%);
+    z-index: 1000;
+
 }
 
 .progress {
@@ -281,5 +286,7 @@ html,.bodyQuiz{
   
   .question-container {
     display: flex;
+    flex-direction: column; /* Cambiato da row a column per allineare verticalmente */
     gap: 20px;
+    align-items: center;
   }
