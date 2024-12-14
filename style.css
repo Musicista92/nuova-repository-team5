@@ -1,0 +1,285 @@
+/* stile della pagina welcome*/
+body{
+    background-image: url(/assets/bg.jpg);
+    margin: 0;
+    height: 100vh;
+    
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+}
+.container{
+    width: 85%;
+    
+    margin: 0 auto;
+}
+header img{ 
+    width: 150px;
+    margin-top: 40px;
+    
+}
+.h1Welcome{
+    color:white;
+    margin-bottom: 25px;
+    
+}
+.h1Welcome{
+    margin-top: 80px;
+    font-size: 80px;
+    font-family: outfit;
+    font-weight: 300;
+    
+}
+
+
+.h2Welcome{
+    font-size: 2em;
+    color: #d20094;
+    margin-bottom: 8px;
+    margin-top: 2px;
+    font-family: outfit;
+    font-weight:600;
+}
+.pWelcome{
+    margin-top: 0;
+    color: white;
+}
+
+.ulWelcome{
+    margin-top: 45px;
+  margin-left: -10px;  
+}
+.ulWelcome li {
+    
+    font-weight: 400;
+    color: white;
+}
+.labelWelcome{
+    color: white;
+    margin-top: 300px;
+}
+
+.h1Welcome span, .ulWelcome li span{
+    color: white;
+    font-size: larger;
+    font-weight: bold;
+    
+}
+.finalDivWelcome{
+    display: flex;
+    align-items: center; 
+    justify-content: space-between;
+    margin-top: 70px;
+    
+}
+#proceedButton{
+    padding: 20px;
+    padding: 20px 60px; 
+    font-size: 20px; 
+    font-weight: bold; 
+    background-color: #00ffff; 
+    color: black; 
+    border: none; 
+    border-radius: 0px; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); 
+    cursor: pointer; 
+    transition: all 0.3s ease;
+    
+}
+#proceedButton:hover {
+    background-color: #00ffff; 
+    box-shadow: 0 0 20px #00ffff, 0 0 30px #00ffff; 
+}
+
+.proceedCheckbox {
+    width: 20px; 
+    height: 20px; 
+    accent-color: #00ffff; 
+    margin-right: 10px; 
+    
+    appearance: none; 
+    -webkit-appearance: none; 
+    width: 20px; 
+    height: 20px; 
+    border: 3px solid white; 
+    border-radius: 0px; 
+    background-color: transparent;
+    margin-bottom: -5px;
+}
+
+.proceedCheckbox:checked::after {
+    content: ''; 
+    position: absolute;
+    width: 5px; 
+    height: 10px; 
+    border: solid white; 
+    border-width: 0 2px 2px 0; 
+    transform: rotate(45deg); 
+    top: 630px; 
+    left: 105px; 
+}
+
+.labelWelcome {
+    font-size: 16px; 
+    color: white;
+   
+}
+
+/*fine stile pagina welcome*/
+
+/*inizio stile pagina quiz e risposte*/
+html,.bodyQuiz{
+    margin: 0;
+    height: 100vh;
+    background-image: url(assets/bg.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#header{
+
+    width: 100%;
+    height: 20%;
+}
+
+#header img {
+
+    width:150px ;
+    margin: 40px 60px;
+}
+
+#mainQuiz{
+
+    width: 100%;
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#formQuiz{
+
+    height: 100%;
+    width: 60%;
+}
+
+.h3Answer{
+
+    color: white;
+    font-size: 60px;
+    font-weight: lighter;
+    text-align: center;
+    /*font-family: Outfit;*/
+}
+
+.spanH3{
+
+    font-weight: 600;
+}
+
+.conteinerAnswer{
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+}
+
+.inputButton{
+
+    background-color: transparent;
+    color: white;
+    border-radius: 50px 50px 50px 50px;
+    box-shadow: -2px -2px 0px white;
+    font-size: 16px;
+    padding: 20px;
+    cursor: pointer;  
+    width: 300px;
+    transition: background-color 0.3s;
+}
+
+.inputButton:hover{
+
+    background-color: #900080;
+    border-bottom-color: #900080;
+    border-right-color:#900080;
+}
+
+#footerQuiz{
+
+    color: white;
+    width: 100%;
+    height: 10%;
+    font-weight: bold;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.spanFooterCounter{
+
+    color: #900080;
+}
+
+
+.circle {
+    position: fixed;
+    width: 142px;
+    height: 142px;
+}
+
+.progress {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: transparent; /* Sfondo trasparente */
+    mask: radial-gradient(circle, transparent 60%, black 61%); /* Mostra solo i bordi */
+    -webkit-mask: radial-gradient(circle, transparent 60%, black 61%);
+}
+
+.inner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-family: outfit;
+    text-align: center;
+    flex-direction: column;
+    background-color: transparent; /* Statico e trasparente */
+}
+
+.inner span {
+    font-size: 8px;
+}
+
+.inner span.remaining {
+    font-size: 47px;
+    font-weight: bold;
+}
+
+.hidden {
+    display: none;
+  }
+  
+  .visible {
+    display: block;
+  }
+  
+  .question-container {
+    display: flex;
+    gap: 20px;
+  }
