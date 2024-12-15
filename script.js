@@ -135,36 +135,35 @@ function updatefooterQuizCounter() {
 }
 
 function displayQuestion() {
-  /* Nascondi tutte le domande e risposte */
-  questionContainers.forEach(question => question.classList.add('hidden'));
-  answerContainers.forEach(container => container.classList.add('hidden'));
+    /* Nascondi tutte le domande e risposte*/
+    questionContainers.forEach(question => question.classList.add('hidden'));
+    answerContainers.forEach(container => container.classList.add('hidden'));
 
-  /* Mostra la domanda corrente */
-  questionContainers[currentQuestionIndex].classList.remove('hidden');
-  answerContainers[currentQuestionIndex].classList.remove('hidden');
-  const currentQuestion = questions[currentQuestionIndex];
-  const allAnswers = [...currentQuestion.incorrect_answers, currentQuestion.correct_answer];
-  
-  /* Mescola le risposte */
-  allAnswers.sort(() => Math.random() - 0.5);
+    /*Mostra la domanda corrente*/
+    questionContainers[currentQuestionIndex].classList.remove('hidden');
+    answerContainers[currentQuestionIndex].classList.remove('hidden');
+    const currentQuestion = questions[currentQuestionIndex];
+    const allAnswers = [...currentQuestion.incorrect_answers, currentQuestion.correct_answer];
+    /* Mescola le risposte*/
+    allAnswers.sort(() => Math.random() - 0.5);
+    /*Visualizza le risposte*/
+    answerContainers[currentQuestionIndex].innerHTML = '';
+    for (let i = 0; i < allAnswers.length; i++) {
+        const button = document.createElement('input');
+        button.type = "button";
+        button.value = allAnswers[i];
+        button.classList.add('inputButton');
+        button.onclick = () => checkAnswer(allAnswers[i], currentQuestion.correct_answer);
+        answerContainers[currentQuestionIndex].appendChild(button);
+    }
 
-  /* Visualizza le risposte */
-  answerContainers[currentQuestionIndex].innerHTML = '';
-  for (let i = 0; i < allAnswers.length; i++) {
-    const button = document.createElement('input');
-    button.type = "button";
-    button.value = allAnswers[i];
-    button.classList.add('inputButton');
-    button.onclick = () => checkAnswer(allAnswers[i], currentQuestion.correct_answer);
-    answerContainers[currentQuestionIndex].appendChild(button);
-  }
+    /* Riporta il timer a 60 secondi per ogni domanda*/
+    resetTimer();
 
-  /* Riporta il timer a 60 secondi per ogni domanda */
-  resetTimer();
-
-  /* Aggiorna il contatore delle domande nel footer */
-  updatefooterQuizCounter();
+    /* Aggiorna il contatore delle domande nel footer*/
+    updatefooterQuizCounter();
 }
+
 
 function checkAnswer(selectedAnswer, correctAnswer) {
   if (selectedAnswer === correctAnswer) {
@@ -182,35 +181,28 @@ function checkAnswer(selectedAnswer, correctAnswer) {
 }
 
 function updateTimer() {
-  if (elapsed < 60000) {
-    elapsed += 50;
-    const progressPercentage = (elapsed / 60000) * 360;
-
-    progressElement.style.background = "conic-gradient(rgba(255, 255, 255, 0.35) " + progressPercentage + "deg, rgba(0, 255, 255, 1) " + progressPercentage + "deg)";
-    progressElement.style.boxShadow = `
-      inset 0 0 3px rgba(0, 0, 0, 0.4),
-      inset 0 0 3px rgba(0, 0, 0, 0.4),
-      0 0 5px rgba(0, 0, 0, 0.3),
-      0 0 5px rgba(0, 0, 0, 0.3)
-    `;
-
-    if (elapsed % 1000 === 0) {
-      timer--;
-      timeElement.textContent = timer;
+    if (elapsed < 60000) {
+        elapsed += 50;
+        const progressPercentage = (elapsed / 60000) * 360;
+        progressElement.style.background = `conic-gradient(#00FFFF ${progressPercentage}deg, rgba(169, 169, 169, 0.3) ${progressPercentage}deg)`; // Anima solo i bordi
+        if (elapsed % 1000 === 0) {
+            timer--;
+            timeElement.textContent = timer; // Aggiorna solo il testo al centro
+        }
+    } else {
+        clearInterval(progressInterval);
+        clearInterval(timerInterval);
+        wrongAnswers++; /* Se il tempo scade, considera la risposta come errata */
+        /* Passa alla prossima domanda */
+        setTimeout(() => {
+            if (currentQuestionIndex < questions.length - 1) {
+                currentQuestionIndex++;
+                displayQuestion();
+            } else {
+                displayFinalResults();
+            }
+        }, 1000);
     }
-  } else {
-    clearInterval(progressInterval);
-    clearInterval(timerInterval);
-    wrongAnswers++; /* Se il tempo scade, considera la risposta come errata */
-    setTimeout(() => {
-      if (currentQuestionIndex < questions.length - 1) {
-        currentQuestionIndex++;
-        displayQuestion();
-      } else {
-        displayFinalResults();
-      }
-    }, 1000);
-  }
 }
 
 function resetTimer() {
@@ -281,4 +273,3 @@ function displayFinalResults() {
 }
 
 
-   
