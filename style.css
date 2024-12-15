@@ -104,8 +104,8 @@ header img{
     
     appearance: none; 
     -webkit-appearance: none; 
-    width: 20px; 
-    height: 20px; 
+    width: 2em; 
+    height: 2em; 
     border: 3px solid white; 
     border-radius: 0px; 
     background-color: transparent;
@@ -120,8 +120,8 @@ header img{
     border: solid white; 
     border-width: 0 2px 2px 0; 
     transform: rotate(45deg); 
-    top: 630px; 
-    left: 105px; 
+    top: 86%; 
+    left: 8.3%; 
 }
 
 .labelWelcome {
