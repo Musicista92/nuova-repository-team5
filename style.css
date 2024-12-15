@@ -21,7 +21,7 @@ header img{
 }
 .h1Welcome{
     color:white;
-    margin-bottom: 25px;
+    margin-bottom: 50px;
     
 }
 .h1Welcome{
@@ -30,6 +30,10 @@ header img{
     font-family: outfit;
     font-weight: 300;
     
+}
+
+.h1Welcome {
+    line-height: 0.7; /* Riduce lo spazio tra le righe */
 }
 
 
@@ -100,8 +104,8 @@ header img{
     
     appearance: none; 
     -webkit-appearance: none; 
-    width: 20px; 
-    height: 20px; 
+    width: 2em; 
+    height: 2em; 
     border: 3px solid white; 
     border-radius: 0px; 
     background-color: transparent;
@@ -116,8 +120,8 @@ header img{
     border: solid white; 
     border-width: 0 2px 2px 0; 
     transform: rotate(45deg); 
-    top: 630px; 
-    left: 105px; 
+    top: 86%; 
+    left: 8.3%; 
 }
 
 .labelWelcome {
@@ -158,7 +162,7 @@ html,.bodyQuiz{
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
 }
 
 #formQuiz{
@@ -170,10 +174,17 @@ html,.bodyQuiz{
 .h3Answer{
 
     color: white;
-    font-size: 60px;
-    font-weight: lighter;
+    width: 100%;
+    height: 40%;
+    margin-top: 45px;
+    font-size: 45px;  
+    max-width: 100%;  /* Impedisce al testo di espandersi oltre la larghezza del contenitore */
+    word-wrap: break-word;  /* Forza il testo a andare a capo se è troppo lungo */
     text-align: center;
-    /*font-family: Outfit;*/
+    font-weight: lighter;
+    padding: 10px;  /* Aggiunge spazio interno per evitare che il testo tocchi i bordi */
+    box-sizing: border-box;  /* Include il padding nel calcolo della larghezza */
+    white-space: normal;
 }
 
 .spanH3{
@@ -232,6 +243,11 @@ html,.bodyQuiz{
     position: fixed;
     width: 142px;
     height: 142px;
+    top: 20%;
+    right: 10%;
+    transform: translateY(-50%);
+    z-index: 1000;
+
 }
 
 .progress {
@@ -281,5 +297,7 @@ html,.bodyQuiz{
   
   .question-container {
     display: flex;
+    flex-direction: column; /* Cambiato da row a column per allineare verticalmente */
     gap: 20px;
+    align-items: center;
   }
