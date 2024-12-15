@@ -39,11 +39,13 @@ header img{
 
 .h2Welcome{
     font-size: 2em;
-    color: #d20094;
+    color: #d20094 !important;
     margin-bottom: 8px;
     margin-top: 2px;
     font-family: outfit;
     font-weight:600;
+    background: none !important;
+    text-align: left;
 }
 .pWelcome{
     margin-top: 0;
@@ -120,7 +122,7 @@ header img{
     border: solid white; 
     border-width: 0 2px 2px 0; 
     transform: rotate(45deg); 
-    top: 86%; 
+    top: 89%; 
     left: 8.3%; 
 }
 
@@ -301,3 +303,112 @@ html,.bodyQuiz{
     gap: 20px;
     align-items: center;
   }
+
+  .resultContainer {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0,);
+
+}
+
+#progress-final {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: conic-gradient(#D3D3D3 0deg, #D3D3D3 0deg); /* Partenza vuota */
+    position: relative;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    margin: 20px auto;
+  }
+
+  #progress-final .text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+  }
+
+
+table {
+  background-color: #ffffff; /* Sfondo bianco */
+  color: #333333; /* Testo grigio scuro per leggibilità */
+  font-family: Arial, sans-serif; /* Font pulito */
+  width: 100%;
+  border-collapse: collapse; /* Evita doppie linee nei bordi */
+}
+
+table th {
+  background-color: #f2f2f2; /* Sfondo grigio chiaro per intestazioni */
+  color: #000000; /* Testo nero nelle intestazioni */
+  font-weight: bold; /* Testo in grassetto */
+  text-align: center; /* Allinea il testo al centro */
+  padding: 10px; /* Spaziatura interna */
+}
+
+table td {
+  background-color: #ffffff; /* Sfondo bianco per celle */
+  color: #333333; /* Testo grigio scuro */
+  border: 1px solid #dddddd; /* Bordi grigi sottili */
+  padding: 10px; /* Spaziatura interna */
+  text-align: center; /* Testo centrato */
+}
+
+table tr:nth-child(even) {
+  background-color: #f9f9f9; /* Riga alternata grigio chiarissimo */
+}
+
+table tr:hover {
+  background-color: #f1f1f1; /* Sfondo leggermente più scuro al passaggio del mouse */
+}
+h2 {
+  color: #ffffff; /* Testo bianco */
+  background-color: #333333; /* Sfondo scuro per contrasto */
+  text-align: center; /* Allineamento al centro */
+  padding: 10px; /* Spaziatura interna */
+  margin: 0; /* Rimuove il margine esterno */
+  font-family: Arial, sans-serif; /* Font pulito e leggibile */
+}
+
+/* Stile per il testo delle risposte corrette */
+.correct-answers {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: white; /* Testo bianco */
+    text-align: center;
+    margin: 10px 0; /* Spaziatura sopra e sotto */
+}
+
+/* Stile per la percentuale delle risposte corrette */
+.correct-percentage {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: white; /* Testo bianco */
+    text-align: center;
+    margin: 10px 0; /* Spaziatura sopra e sotto */
+}
+
+/* Stile per il messaggio di superamento */
+.result-message {
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 15px;
+}
+
+/* Verde per superato */
+.result-message.pass {
+    color: #00FF00; /* Verde brillante */
+}
+
+/* Rosso per non superato */
+.result-message.fail {
+    color: #FF0000; /* Rosso brillante */
+}
