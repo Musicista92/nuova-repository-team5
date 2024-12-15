@@ -139,34 +139,28 @@ function updatefooterQuizCounter() {
 
 
 function displayQuestion() {
-    /* Nascondi tutte le domande e risposte*/
-    questionContainers.forEach(question => question.classList.add('hidden'));
-    answerContainers.forEach(container => container.classList.add('hidden'));
+  const quizContainer = document.getElementById('quizContainer');
+  const currentQuestion = questions[currentQuestionIndex];
+  const allAnswers = [...currentQuestion.incorrect_answers, currentQuestion.correct_answer];
 
-    /*Mostra la domanda corrente*/
-    questionContainers[currentQuestionIndex].classList.remove('hidden');
-    answerContainers[currentQuestionIndex].classList.remove('hidden');
-    const currentQuestion = questions[currentQuestionIndex];
-    const allAnswers = [...currentQuestion.incorrect_answers, currentQuestion.correct_answer];
-    /* Mescola le risposte*/
-    allAnswers.sort(() => Math.random() - 0.5);
-    /*Visualizza le risposte*/
-    answerContainers[currentQuestionIndex].innerHTML = '';
-    for (let i = 0; i < allAnswers.length; i++) {
-        const button = document.createElement('input');
-        button.type = "button";
-        button.value = allAnswers[i];
-        button.classList.add('inputButton');
-        button.onclick = () => checkAnswer(allAnswers[i], currentQuestion.correct_answer);
-        answerContainers[currentQuestionIndex].appendChild(button);
-    }
+  // Mescola le risposte
+  allAnswers.sort(() => Math.random() - 0.5);
 
-    /* Riporta il timer a 60 secondi per ogni domanda*/
-    resetTimer();
+  // Crea la struttura HTML per la domanda corrente
+  quizContainer.innerHTML = `
+    <h3 class="h3Answer">${currentQuestion.question}</h3>
+    <div class="conteinerAnswer">
+        ${allAnswers
+            .map(answer => `<button class="inputButton" onclick="checkAnswer('${answer}', '${currentQuestion.correct_answer}')">${answer}</button>`)
+            .join('')}
+    </div>
+`;
 
-    /* Aggiorna il contatore delle domande nel footer*/
-    updatefooterQuizCounter();
+  // Resetta il timer e aggiorna il contatore
+  resetTimer();
+  updatefooterQuizCounter();
 }
+
 
 function checkAnswer(selectedAnswer, correctAnswer) {
     if (selectedAnswer === correctAnswer) {
@@ -187,7 +181,7 @@ function updateTimer() {
     if (elapsed < 60000) {
         elapsed += 50;
         const progressPercentage = (elapsed / 60000) * 360;
-        progressElement.style.background = `conic-gradient(#00FFFF ${progressPercentage}deg, rgba(169, 169, 169, 0.3) ${progressPercentage}deg)`; // Anima solo i bordi
+        progressElement.style.background = `conic-gradient(rgba(169, 169, 169, 0.3) ${progressPercentage}deg, #00FFFF ${progressPercentage}deg)`; // Anima solo i bordi
         if (elapsed % 1000 === 0) {
             timer--;
             timeElement.textContent = timer; // Aggiorna solo il testo al centro
@@ -229,4 +223,3 @@ function startQuiz() {
 
 window.onload = startQuiz;
 
-   
