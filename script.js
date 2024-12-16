@@ -117,6 +117,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Codice seconda pagina
+let userAnswers = []; // Array per salvare le risposte dell'utente
 let currentQuestionIndex = 0;
 let timer = 60;  /* Durata del timer in secondi */
 let elapsed = 0;  /* Tempo trascorso in millisecondi */
@@ -166,11 +167,15 @@ function displayQuestion() {
 
 
 function checkAnswer(selectedAnswer, correctAnswer) {
+  // Salva la risposta dell'utente nell'array
+  userAnswers[currentQuestionIndex] = selectedAnswer;
+
   if (selectedAnswer === correctAnswer) {
-    score++;  /* Incrementa il punteggio per risposta corretta */
+    score++; /* Incrementa il punteggio per risposta corretta */
   } else {
-    wrongAnswers++;  /* Incrementa il conteggio delle risposte sbagliate */
+    wrongAnswers++; /* Incrementa il conteggio delle risposte sbagliate */
   }
+
   /* Passa immediatamente alla prossima domanda senza ritardo */
   if (currentQuestionIndex < questions.length - 1) {
     currentQuestionIndex++;
@@ -228,48 +233,99 @@ function displayFinalResults() {
   const correctAnswersCount = score;
   const wrongAnswersCount = wrongAnswers;
   const totalQuestions = questions.length;
-  const pointsPerQuestion = 100 / totalQuestions;  // Points per question, e.g. 10% per each question
+  const correctPercentage = ((correctAnswersCount / totalQuestions) * 100).toFixed(2);
 
-  // Calculate the total score based on correct answers
-  const finalScore = correctAnswersCount * pointsPerQuestion;  // Multiply correct answers by points per question
+  document.body.innerHTML = ''; // Cancella il contenuto attuale
 
-  // Calculate the percentages for correct and wrong answers
-  const correctPercentage = (correctAnswersCount * pointsPerQuestion).toFixed(2);
-  const wrongPercentage = (wrongAnswersCount * pointsPerQuestion).toFixed(2);
+  const resultsContainer = document.createElement('div');
+  resultsContainer.style.display = 'flex';
+  resultsContainer.style.justifyContent = 'space-between';
+  resultsContainer.style.alignItems = 'flex-start';
+  resultsContainer.style.padding = '20px';
 
-  // Create the result container
-  const resultContainer = document.createElement('div');
-  resultContainer.classList.add('resultContainer');
+  // Contenitore della tabella
+  const tableContainer = document.createElement('div');
+  tableContainer.style.width = '60%';
 
-  // Determine the final result based on the score
-  let resultText = '';
-  if (finalScore >= 80) {
-    resultText = 'Passed ' + finalScore.toFixed(2) + '%';
-  } else if (finalScore >= 50) {
-    resultText = 'Needs Improvement ' + finalScore.toFixed(2) + '%';
-  } else {
-    resultText = 'Failed ' + finalScore.toFixed(2) + '%';
-  }
+  let tableHTML = `
+    <h2>Riepilogo Risposte</h2>
+    <p class="correct-answers">Risposte Corrette: ${correctAnswersCount} su ${totalQuestions}</p>
+    <table border="1" style="width: 100%; text-align: center; border-collapse: collapse;">
+      <thead>
+        <tr>
+          <th>Domanda</th>
+          <th>Tua Risposta</th>
+          <th>Risposta Corretta</th>
+          <th>Esito</th>
+        </tr>
+      </thead>
+      <tbody>
+  `;
 
-  // Create the progress bar with the inverse gradient
-  const progressFinalElement = document.createElement('div');
-  progressFinalElement.id = 'progress-final';
-  progressFinalElement.style.background = 'conic-gradient(#00FF00 ' + finalScore + '%, #FF0000 ' + finalScore + '% 100%)';
+  questions.forEach((question, index) => {
+    const userAnswer = userAnswers[index] || 'Nessuna risposta';
+    const isCorrect = userAnswer === question.correct_answer;
+    tableHTML += `
+      <tr>
+        <td>${question.question}</td>
+        <td>${userAnswer}</td>
+        <td>${question.correct_answer}</td>
+        <td style="color: ${isCorrect ? 'green' : 'red'};">
+          ${isCorrect ? '✔️' : '❌'}
+        </td>
+      </tr>
+    `;
+  });
 
-  // Add the text and progress bar
-  resultContainer.innerHTML = '<h2>Final Results</h2>' +
-                              '<p>Correct Answers: ' + correctAnswersCount + ' (' + correctPercentage + '%)</p>' +
-                              '<p>Wrong Answers: ' + wrongAnswersCount + ' (' + wrongPercentage + '%)</p>';
-  
-  const textElement = document.createElement('div');
-  textElement.classList.add('text');
-  textElement.textContent = resultText;
-  progressFinalElement.appendChild(textElement);
-  resultContainer.appendChild(progressFinalElement);
+  tableHTML += '</tbody></table>';
+  tableContainer.innerHTML = tableHTML;
 
-  // Add the result container to the body
-  document.body.innerHTML = '';  // Clear the body of the page
-  document.body.appendChild(resultContainer);  // Add the results
+  // Contenitore del grafico
+  const chartContainer = document.createElement('div');
+  chartContainer.style.width = '35%';
+  chartContainer.innerHTML = `
+    <h2>Grafico Risposte</h2>
+    <canvas id="resultsChart"></canvas>
+  `;
+
+  // Aggiungere il messaggio di percentuale e risultato sotto al grafico
+  const resultSummary = document.createElement('div');
+  resultSummary.style.textAlign = 'center';
+  resultSummary.style.marginTop = '20px';
+
+  const resultText = correctPercentage >= 80 ? 'Esame Superato 🎉' : 'Esame Non Superato ❌';
+  resultSummary.innerHTML = `
+  <p class="correct-answers">Risposte Corrette: ${correctAnswersCount} su ${totalQuestions}</p>
+  <p class="correct-percentage">Percentuale Risposte Corrette: ${correctPercentage}%</p>
+  <p class="result-message ${correctPercentage >= 80 ? 'pass' : 'fail'}">
+    ${resultText}
+  </p>
+`;
+
+  // Aggiungere i contenitori alla pagina
+  chartContainer.appendChild(resultSummary);
+  resultsContainer.appendChild(tableContainer);
+  resultsContainer.appendChild(chartContainer);
+  document.body.appendChild(resultsContainer);
+
+  // Creazione del grafico a torta
+  const ctx = document.getElementById('resultsChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'pie',
+    data: {
+      labels: ['Risposte Corrette', 'Risposte Sbagliate'],
+      datasets: [{
+        data: [correctAnswersCount, wrongAnswersCount],
+        backgroundColor: ['#00FF00', '#FF0000']
+      }]
+    },
+    options: {
+      plugins: {
+        legend: {
+          position: 'top',
+          labels: { font: { size: 14 } }
+        }
+      }
+    }
+  });
 }
-
-
