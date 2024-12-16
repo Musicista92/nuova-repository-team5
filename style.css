@@ -39,11 +39,13 @@ header img{
 
 .h2Welcome{
     font-size: 2em;
-    color: #d20094;
+    color: #d20094 !important;
     margin-bottom: 8px;
     margin-top: 2px;
     font-family: outfit;
     font-weight:600;
+    background: none !important;
+    text-align: left;
 }
 .pWelcome{
     margin-top: 0;
@@ -120,7 +122,7 @@ header img{
     border: solid white; 
     border-width: 0 2px 2px 0; 
     transform: rotate(45deg); 
-    top: 86%; 
+    top: 89%; 
     left: 8.3%; 
 }
 
@@ -172,11 +174,19 @@ html,.bodyQuiz{
 }
 
 .h3Answer{
+
     color: white;
-    font-size: 60px;
-    font-weight: lighter;
+    width: 100%;
+    height: 40%;
+    margin-top: 45px;
+    font-size: 45px;  
+    max-width: 100%;  /* Impedisce al testo di espandersi oltre la larghezza del contenitore */
+    word-wrap: break-word;  /* Forza il testo a andare a capo se è troppo lungo */
     text-align: center;
-    /*font-family: Outfit;*/
+    font-weight: lighter;
+    padding: 10px;  /* Aggiunge spazio interno per evitare che il testo tocchi i bordi */
+    box-sizing: border-box;  /* Include il padding nel calcolo della larghezza */
+    white-space: normal;
 }
 
 .spanH3{
@@ -185,6 +195,7 @@ html,.bodyQuiz{
 }
 
 .conteinerAnswer{
+
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -193,6 +204,7 @@ html,.bodyQuiz{
 }
 
 .inputButton{
+
     background-color: transparent;
     color: white;
     border-radius: 50px 50px 50px 50px;
@@ -205,10 +217,14 @@ html,.bodyQuiz{
 }
 
 .inputButton:hover{
-    background-color: #d20094;
+
+    background-color: #900080;
+    border-bottom-color: #900080;
+    border-right-color:#900080;
 }
 
 #footerQuiz{
+
     color: white;
     width: 100%;
     height: 10%;
@@ -217,7 +233,6 @@ html,.bodyQuiz{
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin-top: -20px;
 }
 
 .spanFooterCounter{
@@ -228,9 +243,9 @@ html,.bodyQuiz{
 
 .circle {
     position: fixed;
-    width: 125px;
-    height: 125px;
-    top: 15%;
+    width: 142px;
+    height: 142px;
+    top: 20%;
     right: 10%;
     transform: translateY(-50%);
     z-index: 1000;
@@ -242,9 +257,9 @@ html,.bodyQuiz{
     width: 100%;
     height: 100%;
     border-radius: 50%;
-     
-    -webkit-mask: radial-gradient(circle, transparent 53%, black 57%);
-
+    background-color: transparent; /* Sfondo trasparente */
+    mask: radial-gradient(circle, transparent 60%, black 61%); /* Mostra solo i bordi */
+    -webkit-mask: radial-gradient(circle, transparent 60%, black 61%);
 }
 
 .inner {
@@ -252,6 +267,8 @@ html,.bodyQuiz{
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    width: 110px;
+    height: 110px;
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -265,12 +282,11 @@ html,.bodyQuiz{
 
 .inner span {
     font-size: 8px;
-    font-weight: lighter;
 }
 
 .inner span.remaining {
-    font-size: 38px;
-    font-weight: normal;
+    font-size: 47px;
+    font-weight: bold;
 }
 
 .hidden {
@@ -283,50 +299,12 @@ html,.bodyQuiz{
   
   .question-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* Cambiato da row a column per allineare verticalmente */
     gap: 20px;
+    align-items: center;
   }
- 
-  .question-container:first-child .h3Answer {
-    margin-top: 0px;
-}
 
-.question-container:nth-of-type(2) .h3Answer {
-    margin-top: -100px;
-}
-
-.question-container:nth-of-type(3) .h3Answer {
-    margin-top: 0px;
-}
-
-.question-container:nth-of-type(4) .h3Answer {
-    margin-top: 0px;
-}
-
-.question-container:nth-of-type(5) .h3Answer {
-    margin-top: 0px;
-}
-.question-container:nth-of-type(6) .h3Answer {
-    margin-top: 0px;
-}
-
-.question-container:nth-of-type(7) .h3Answer {
-    margin-top: 0px;
-}
-
-.question-container:nth-of-type(8) .h3Answer {
-    margin-top: 0px;
-}
-
-.question-container:nth-of-type(9) .h3Answer {
-    margin-top: 0px;
-}
-
-.question-container:nth-of-type(10) .h3Answer {
-    margin-top: 0px;
-}
-
-.resultContainer {
+  .resultContainer {
     position: fixed;
     top: 50%;
     left: 50%;
@@ -335,7 +313,7 @@ html,.bodyQuiz{
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0px 0px 15px rgba(0, 0, 0,);
-  
+
 }
 
 #progress-final {
@@ -347,7 +325,7 @@ html,.bodyQuiz{
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     margin: 20px auto;
   }
-  
+
   #progress-final .text {
     position: absolute;
     top: 50%;
@@ -357,3 +335,80 @@ html,.bodyQuiz{
     font-weight: bold;
     color: #fff;
   }
+
+
+table {
+  background-color: #ffffff; /* Sfondo bianco */
+  color: #333333; /* Testo grigio scuro per leggibilità */
+  font-family: Arial, sans-serif; /* Font pulito */
+  width: 100%;
+  border-collapse: collapse; /* Evita doppie linee nei bordi */
+}
+
+table th {
+  background-color: #f2f2f2; /* Sfondo grigio chiaro per intestazioni */
+  color: #000000; /* Testo nero nelle intestazioni */
+  font-weight: bold; /* Testo in grassetto */
+  text-align: center; /* Allinea il testo al centro */
+  padding: 10px; /* Spaziatura interna */
+}
+
+table td {
+  background-color: #ffffff; /* Sfondo bianco per celle */
+  color: #333333; /* Testo grigio scuro */
+  border: 1px solid #dddddd; /* Bordi grigi sottili */
+  padding: 10px; /* Spaziatura interna */
+  text-align: center; /* Testo centrato */
+}
+
+table tr:nth-child(even) {
+  background-color: #f9f9f9; /* Riga alternata grigio chiarissimo */
+}
+
+table tr:hover {
+  background-color: #f1f1f1; /* Sfondo leggermente più scuro al passaggio del mouse */
+}
+h2 {
+  color: #ffffff; /* Testo bianco */
+  background-color: #333333; /* Sfondo scuro per contrasto */
+  text-align: center; /* Allineamento al centro */
+  padding: 10px; /* Spaziatura interna */
+  margin: 0; /* Rimuove il margine esterno */
+  font-family: Arial, sans-serif; /* Font pulito e leggibile */
+}
+
+/* Stile per il testo delle risposte corrette */
+.correct-answers {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: white; /* Testo bianco */
+    text-align: center;
+    margin: 10px 0; /* Spaziatura sopra e sotto */
+}
+
+/* Stile per la percentuale delle risposte corrette */
+.correct-percentage {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: white; /* Testo bianco */
+    text-align: center;
+    margin: 10px 0; /* Spaziatura sopra e sotto */
+}
+
+/* Stile per il messaggio di superamento */
+.result-message {
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 15px;
+}
+
+/* Verde per superato */
+.result-message.pass {
+    color: #00FF00; /* Verde brillante */
+}
+
+/* Rosso per non superato */
+.result-message.fail {
+    color: #FF0000; /* Rosso brillante */
+}
